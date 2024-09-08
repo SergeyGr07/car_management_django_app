@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{{ car.year }} {{ car.make }} {{ car.model }}</h1>
+  <p>{{ car.description }}</p>
+  <p>Владелец: {{ car.owner.username }}</p>
+  
+  {% if user == car.owner %}
+    <a href="{% url 'car_edit' pk=car.pk %}">Редактировать</a>
+    <a href="{% url 'car_delete' pk=car.pk %}">Удалить</a>
+  {% endif %}
+
+  <h2>Комментарии:</h2>
+  {% for comment in comments %}
+    <p>{{ comment.author.username }}: {{ comment.content }}</p>
+  {% endfor %}
+
+  {% if user.is_authenticated %}
+    <h3>Добавить комментарий:</h3>
+    <form method="post">
+      {% csrf_token %}
+      {{ comment_form.as_p }}
+      <button type="submit">Отправить</button>
+    </form>
+  {% endif %}
+{% endblock %}
