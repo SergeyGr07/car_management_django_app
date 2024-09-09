@@ -13,7 +13,7 @@
 
 ```bash
 git clone https://github.com/SergeyGr07/car_management_django_app
-cd car-management
+cd car_management_django_app
 ```
 
 2. Создайте файл .env в корневой директории проекта и заполните его следующим содержимым:
