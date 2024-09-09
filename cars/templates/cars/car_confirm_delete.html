@@ -1,11 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Удалить автомобиль</h1>
-  <p>Вы уверены, что хотите удалить автомобиль {{ car.year }} {{ car.make }} {{ car.model }}?</p>
-  <form method="post">
-    {% csrf_token %}
-    <button type="submit">Да, удалить</button>
-  </form>
-  <a href="{% url 'car_detail' pk=car.pk %}">Отмена</a>
+  <div class="container mt-4">
+    <h1>{% if form.instance.pk %}Редактировать{% else %}Добавить{% endif %} автомобиль</h1>
+    
+    <form method="post" class="mt-3">
+      {% csrf_token %}
+      {{ form.as_p }}
+      
+      <button type="submit" class="btn btn-primary">Сохранить</button>
+    </form>
+  </div>
 {% endblock %}

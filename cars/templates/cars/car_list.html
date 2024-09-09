@@ -5,13 +5,13 @@
   {% if user.is_authenticated %}
     <a href="{% url 'car_create' %}">Добавить новый автомобиль</a>
   {% endif %}
-  <ul>
+  <ul class="list-group">
     {% for car in cars %}
-      <li>
-        <a href="{% url 'car_detail' pk=car.pk %}">{{ car.year }} {{ car.make }} {{ car.model }}</a>
+      <li class="list-group-item">
+        <a href="{% url 'car_detail' pk=car.pk %}" type="button" class="btn btn-link">{{ car.year }} {{ car.make }} {{ car.model }}</a>
         {% if user == car.owner %}
-          <a href="{% url 'car_edit' pk=car.pk %}">Редактировать</a>
-          <a href="{% url 'car_delete' pk=car.pk %}">Удалить</a>
+          <a href="{% url 'car_edit' pk=car.pk %}" type="button" class="btn btn-primary">Редактировать</a>
+          <a href="{% url 'car_delete' pk=car.pk %}" type="button" class="btn btn-danger">Удалить</a>
         {% endif %}
       </li>
     {% empty %}

@@ -1,26 +1,34 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>{{ car.year }} {{ car.make }} {{ car.model }}</h1>
-  <p>{{ car.description }}</p>
-  <p>Владелец: {{ car.owner.username }}</p>
-  
-  {% if user == car.owner %}
-    <a href="{% url 'car_edit' pk=car.pk %}">Редактировать</a>
-    <a href="{% url 'car_delete' pk=car.pk %}">Удалить</a>
-  {% endif %}
+  <div class="container mt-4">
+    <h1 class="display-4">{{ car.year }} {{ car.make }} {{ car.model }}</h1>
+    <p class="lead">{{ car.description }}</p>
+    <p><strong>Владелец:</strong> {{ car.owner.username }}</p>
 
-  <h2>Комментарии:</h2>
-  {% for comment in comments %}
-    <p>{{ comment.author.username }}: {{ comment.content }}</p>
-  {% endfor %}
+    {% if user == car.owner %}
+      <div class="mb-3">
+        <a href="{% url 'car_edit' pk=car.pk %}" class="btn btn-primary">Редактировать</a>
+        <a href="{% url 'car_delete' pk=car.pk %}" class="btn btn-danger">Удалить</a>
+      </div>
+    {% endif %}
 
-  {% if user.is_authenticated %}
-    <h3>Добавить комментарий:</h3>
-    <form method="post">
-      {% csrf_token %}
-      {{ comment_form.as_p }}
-      <button type="submit">Отправить</button>
-    </form>
-  {% endif %}
+    <h2>Комментарии:</h2>
+    <div class="list-group mb-4">
+      {% for comment in comments %}
+        <div class="list-group-item">
+          <p><strong>{{ comment.author.username }}:</strong> {{ comment.content }}</p>
+        </div>
+      {% endfor %}
+    </div>
+
+    {% if user.is_authenticated %}
+      <h3>Добавить комментарий:</h3>
+      <form method="post" class="mb-3">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <button type="submit" class="btn btn-success">Отправить</button>
+      </form>
+    {% endif %}
+  </div>
 {% endblock %}
