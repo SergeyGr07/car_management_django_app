@@ -34,7 +34,7 @@ DATABASE=postgres
 
 3. Создайте файл .env.db в корневой директории проекта и заполните его следующим содержимым:
 
-```env.db
+```.env
 POSTGRES_USER=car_management_user
 POSTGRES_PASSWORD=your_strong_password
 POSTGRES_DB=car_management
@@ -72,7 +72,9 @@ docker compose down
 
 2. Измените значение DEBUG на 1 в файле .env:
 
+```.env
 DEBUG=1
+```
 
 3. Запустите контейнеры в режиме разработки:
 
